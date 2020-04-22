@@ -1,13 +1,12 @@
 /*
-Автор: Мельников Владислав Андреевич
-Группа: РИ280001
-
-В данной программе выполнены следующие задания:
-1. Сортировка массива указателями
-2. Макс мин элемент
-3. Пред макс, пред мин
-4. Нахождение недостающего элемента
-5. Функция, создающая структуру с заданными полями
+Author: Melnikov Vladislav Andreevich
+Group: РИ280001
+In this program i have done that tasks:
+1.Sorting arrays with pointers
+2.Max and min element of array
+3.prev max, prev min
+4.Find missing item
+5.function which create structure with fields
 */
 
 #include <iostream> 
@@ -21,7 +20,7 @@ void CreateAndPrintPerson();
 
 int main()
 {
-	//Сортировка массива указателями 
+	//Sorting with pointers
 #pragma region ArraySortByPointers
 	int n = 10;
 	int arr[] = { -12, 3523, 123, 12, 666, 5, 2, 310, 228, 69 };
@@ -31,16 +30,16 @@ int main()
 	sort(n, arr, 0, n - 1);
 #pragma endregion
 
-	//Макс мин элемент 
+	//Max and min element of array
 #pragma region MaxAndMin
 	cout << endl << "Max: " << *(arr + n - 1) << endl;
 	cout << "Min: " << *arr << endl;
-	//Пред макс, пред мин 
+	//prev max, prev min
 	cout << endl << "Max without max: " << *(arr + n - 2) << endl;
 	cout << "Min without min: " << *(arr + 1) << endl;
 	cout << endl << endl;
 #pragma endregion
-	//поиск недостающего элемента
+	//Find missing item
 #pragma region FindMissing
 	int arr2[] = { 4, 5, 7, 8, 9, 10, 11 };
 	int m = sizeof(arr) / sizeof(arr[0]);
@@ -51,7 +50,7 @@ int main()
 		}
 	}
 #pragma endregion
-	//Функция, создающая структуру с заданными полями
+	//function which create structure with fields
 #pragma region CreatingStucture
 	CreateAndPrintPerson();
 #pragma endregion
