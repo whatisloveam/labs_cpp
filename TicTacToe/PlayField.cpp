@@ -1,4 +1,4 @@
-#include "PlayField.h"
+﻿#include "PlayField.h"
 
 PlayField::CellState PlayField::operator[](CellIdx idx)
 {
