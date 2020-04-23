@@ -12,9 +12,10 @@ public:
 	int sumRow(const int iRow) const;
 	int minColumn(const int iCol) const;
 	int maxColumn(const int iCol) const;
-
+	int getDimension() const;
 private:
-	int matrix[3][3] =
+	static constexpr int n = 3;
+	int matrix[n][n] =
 	{
 		{0, 0, 0},
 		{0, 0, 0},
