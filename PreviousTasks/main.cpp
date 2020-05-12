@@ -14,50 +14,87 @@ In this program i have done that tasks:
 
 using namespace std;
 
-//prototypes....
-void sort(int n, int* ptr, int start, int end);
-void CreateAndPrintPerson();
-
-int main()
+void sort(int* ptr, int start, int end) //array and range for sorting
 {
-	//Sorting with pointers
-#pragma region ArraySortByPointers
-	int n = 10;
-	int arr[] = { -12, 3523, 123, 12, 666, 5, 2, 310, 228, 69 };
-	cout << "sort part of array form 3 to 6" << endl;
-	sort(n, arr, 3, 6);
-	cout << endl << "sort all array" << endl;
-	sort(n, arr, 0, n - 1);
-#pragma endregion
+	int i, j, tmp;
 
-	//Max and min element of array
-#pragma region MaxAndMin
-	cout << endl << "Max: " << *(arr + n - 1) << endl;
-	cout << "Min: " << *arr << endl;
-	//prev max, prev min
-	cout << endl << "Max without max: " << *(arr + n - 2) << endl;
-	cout << "Min without min: " << *(arr + 1) << endl;
-	cout << endl << endl;
-#pragma endregion
-	//Find missing item
-#pragma region FindMissing
-	int arr2[] = { 4, 5, 7, 8, 9, 10, 11 };
-	int m = sizeof(arr) / sizeof(arr[0]);
+	for (i = start; i <= end; i++) {
+		for (j = i + 1; j <= end; j++) {
+			if (*(ptr + j) < *(ptr + i)) {
+				tmp = *(ptr + i);
+				*(ptr + i) = *(ptr + j);
+				*(ptr + j) = tmp;
+			}
+		}
+	}
+}
+
+int findMax(int* arr, int n) //array and num on elements as args
+{
+	int max = INT32_MIN;
+	for (int i = 0; i < n; i++)
+		if (arr[i] > max) max = arr[i];
+	return max;
+}
+
+int findMin(int* arr, int n) //array and num on elements as args
+{
+	int min = INT32_MAX;
+	for (int i = 0; i < n; i++)
+		if (arr[i] < min) min = arr[i];
+	return min;
+}
+
+
+int findPredMax(int* arr, int n) //array and num on elements as args
+{
+	int max = INT32_MIN;
+	int predmax = INT32_MIN;
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] > max)
+		{
+			if (max > predmax) predmax = max;
+			max = arr[i];
+		}
+	}
+	return predmax;
+}
+
+int findPredMin(int* arr, int n) //array and num on elements as args
+{
+	int min = INT32_MAX;
+	int predmin = INT32_MAX;
+	for (int i = 0; i < n; i++)
+	{
+		if (arr[i] < min)
+		{
+			if (min < predmin) predmin = min;
+			min = arr[i];
+		}
+	}
+
+	return predmin;
+}
+
+void findMissingElement(int* arr, int m) //array and num on elements as args
+{
 	for (int i = 1; i < m; i++) {
-		if (arr2[i] - arr2[i - 1] != 1) {
-			cout << arr2[i] - 1 << " is missing" << endl;
+		if (arr[i] - arr[i - 1] != 1) {
+			cout << arr[i] - 1 << " is missing" << endl;
 			break;
 		}
 	}
-#pragma endregion
-	//function which create structure with fields
-#pragma region CreatingStucture
-	CreateAndPrintPerson();
-#pragma endregion
-	return 0;
 }
 
-struct Person {
+void printFirst(int* ptr, int n) // just print first n elements of array 
+{
+	for (int i = 0; i < n; i++)
+		cout << *(ptr + i) << " ";
+}
+
+struct Person 
+{
 	int age;
 	string name;
 	char letter;
@@ -80,20 +117,38 @@ void CreateAndPrintPerson()
 	cout << firstPerson.letter;
 }
 
-void sort(int n, int* ptr, int start, int end)
+int main()
 {
-	int i, j, tmp;
+	//Sorting with pointers
+	int arr[] = { -12, 3523, 123, 12, 666, 5, 2, 310, 228, 69 };
+	int n = sizeof(arr) / sizeof(arr[0]);
 
-	for (i = start; i <= end; i++) {
-		for (j = i + 1; j <= end; j++) {
-			if (*(ptr + j) < *(ptr + i)) {
-				tmp = *(ptr + i);
-				*(ptr + i) = *(ptr + j);
-				*(ptr + j) = tmp;
-			}
-		}
-	}
+	printFirst(arr, n);
+	cout << endl << "sort part of array form 3 to 6" << endl;
+	sort(arr, 3, 6);
+	printFirst(arr, n);
+	cout << endl << "sort all array" << endl;
+	sort(arr, 0, n - 1);
+	printFirst(arr, n);
 
-	for (i = 0; i < n; i++)
-		cout << *(ptr + i) << " ";
+	int arr2[] = { -12, 213, 30, 12, 666, -35, 2, 23, 74, 69 };
+
+	//Max and min element of array
+	cout << endl << "Max: " << findMax(arr2, n) << endl;
+	cout << "Min: " << findMin(arr2, n) << endl;
+
+	//prev max, prev min
+	cout << endl << "Max without max: " << findPredMax(arr2, n) << endl;
+	cout << "Min without min: " << findPredMin(arr2, n) << endl;
+	cout << endl << endl;
+
+	//Find missing item
+	int arr3[] = { 4, 5, 7, 8, 9, 10, 11 };
+	int m = sizeof(arr) / sizeof(arr[0]);
+	findMissingElement(arr3, m);
+
+	//function which create structure with fields
+	CreateAndPrintPerson();
+	return 0;
 }
+
