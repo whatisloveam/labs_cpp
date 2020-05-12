@@ -14,20 +14,23 @@ In this program i have done that tasks:
 
 using namespace std;
 
-void sort(int* ptr, int start, int end) //array and range for sorting
+void sort(int* st, int* end) // start and end pointers
 {
-	int i, j, tmp;
 
-	for (i = start; i <= end; i++) {
-		for (j = i + 1; j <= end; j++) {
-			if (*(ptr + j) < *(ptr + i)) {
-				tmp = *(ptr + i);
-				*(ptr + i) = *(ptr + j);
-				*(ptr + j) = tmp;
+	for (int i = 0; i < (end - st + 1); i++)
+	{
+		for (int j = i + 1; j < (end - st + 1); j++)
+		{
+			if (*(st + i) > * (st + j))
+			{
+				int t = *(st + i);
+				*(st + i) = *(st + j);
+				*(st + j) = t;
 			}
 		}
 	}
 }
+
 
 int findMax(int* arr, int n) //array and num on elements as args
 {
@@ -117,18 +120,18 @@ void CreateAndPrintPerson()
 	cout << firstPerson.letter;
 }
 
+
 int main()
 {
 	//Sorting with pointers
 	int arr[] = { -12, 3523, 123, 12, 666, 5, 2, 310, 228, 69 };
 	int n = sizeof(arr) / sizeof(arr[0]);
-
 	printFirst(arr, n);
 	cout << endl << "sort part of array form 3 to 6" << endl;
-	sort(arr, 3, 6);
+	sort(arr+3, arr+6);
 	printFirst(arr, n);
 	cout << endl << "sort all array" << endl;
-	sort(arr, 0, n - 1);
+	sort(arr, arr + n - 1);
 	printFirst(arr, n);
 
 	int arr2[] = { -12, 213, 30, 12, 666, -35, 2, 23, 74, 69 };
