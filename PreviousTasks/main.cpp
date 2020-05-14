@@ -134,8 +134,10 @@ int main()
 	sort(arr, arr + n - 1);
 	printFirst(arr, n);
 
+	cout << endl << endl << "Source array: ";
 	int arr2[] = { -12, 213, 30, 12, 666, -35, 2, 23, 74, 69 };
-
+	printFirst(arr2, n);
+	cout << endl;
 	//Max and min element of array
 	cout << endl << "Max: " << findMax(arr2, arr2+n-1) << endl;
 	cout << "Min: " << findMin(arr2, arr2+n-1) << endl;
